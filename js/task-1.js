@@ -1,15 +1,18 @@
-function getAllPropValues(propName) {
-  const products = [
-    { name: 'Radar', price: 1300, quantity: 4 },
-    { name: 'Scanner', price: 2700, quantity: 3 },
-    { name: 'Droid', price: 400, quantity: 7 },
-    { name: 'Grip', price: 1200, quantity: 9 },
-  ];
-  const smth = [];
-  for (let product of products) {
-    smth.push(product[propName]);
+function isEnoughCapacity(products, containerSize) {
+  const keys = Object.values(products);
+  let count = 0;
+  for (const key of keys) {
+    count += key;
   }
-  return smth;
+  if (count < containerSize) {
+    return true;
+  } else return false;
 }
 
-console.log(getAllPropValues('name')); // "arrays-for-begginers"
+console.log(isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)); // true
+
+console.log(isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)); // false
+
+console.log(isEnoughCapacity({ apples: 1, lime: 5, tomatoes: 3 }, 14)); // true
+
+console.log(isEnoughCapacity({ apples: 18, potatoes: 5, oranges: 2 }, 7)); // false
