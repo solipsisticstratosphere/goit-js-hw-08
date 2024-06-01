@@ -1,61 +1,31 @@
-const getUsersWithFriend = (users, friendName) => {
-  const smth = users.filter(user => user.friends.includes(friendName));
-  return smth;
-};
+class Storage {
+  #item;
+  constructor(item) {
+    this.#item = item;
+  }
+  getItems() {
+    return this.#item;
+  }
+  addItem(newItem) {
+    this.#item.push(newItem);
+  }
+  removeItem(itemToRemove) {
+    this.#item.forEach(element => {
+      if (element === itemToRemove) {
+        this.#item.splice(this.#item.indexOf(itemToRemove), 1);
+      }
+    });
+  }
+}
 
-const allUsers = [
-  {
-    name: 'Moore Hensley',
-    friends: ['Sharron Pace'],
-  },
-  {
-    name: 'Sharlene Bush',
-    friends: ['Briana Decker', 'Sharron Pace'],
-  },
-  {
-    name: 'Ross Vazquez',
-    friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
-  },
-  {
-    name: 'Elma Head',
-    friends: ['Goldie Gentry', 'Aisha Tran'],
-  },
-  {
-    name: 'Carey Barr',
-    friends: ['Jordan Sampson', 'Eddie Strong'],
-  },
-  {
-    name: 'Blackburn Dotson',
-    friends: ['Jacklyn Lucas', 'Linda Chapman'],
-  },
-  {
-    name: 'Sheree Anthony',
-    friends: ['Goldie Gentry', 'Briana Decker'],
-  },
-];
+const storage = new Storage(['Nanitoids', 'Prolonger', 'Antigravitator']);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
 
-console.log(getUsersWithFriend(allUsers, 'Briana Decker'));
-// [
-//   {
-//     name: "Sharlene Bush",
-//     friends: ["Briana Decker", "Sharron Pace"]
-//   },
-//   {
-//     name: "Sheree Anthony",
-//     friends: ["Goldie Gentry", "Briana Decker"]
-//   }
-// ]
+storage.addItem('Droid');
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
 
-console.log(getUsersWithFriend(allUsers, 'Goldie Gentry'));
-// [
-//   {
-//     name: "Elma Head",
-//     friends: ["Goldie Gentry", "Aisha Tran"]
-//   },
-//   {
-//     name: "Sheree Anthony",
-//     friends: ["Goldie Gentry", "Briana Decker"]
-//   }
-// ]
+storage.removeItem('Prolonger');
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
 
-console.log(getUsersWithFriend(allUsers, 'Adrian Cross')); // []
+storage.removeItem('Scaner');
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
